@@ -33,3 +33,9 @@ func (r *taskRepository) FindByUserID(userID string) ([]domain.Task, error) {
 	}
 	return tasks, nil
 }
+
+func (r *taskRepository) Insert(task domain.Task) error {
+	_, err := r.db.Exec("INSERT INTO tasks (user_id, title, description, is_completed, due_date, created_at) VALUES ($1, $2, $3, $4, $5, $6)",
+		task.UserID, task.Title, task.Description, task.IsCompleted, task.DueDate, task.CreatedAt)
+	return err
+}
