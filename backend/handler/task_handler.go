@@ -24,3 +24,16 @@ func (h *TaskHandler) GetTasks(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, tasks)
 }
+
+func (h *TaskHandler) CreateTask(c echo.Context) error {
+	userID := c.Get("user_id").(string)
+
+	var input task.CreateTaskInput
+	if err := c.Bind(&input); err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	}
+	if err := h.uc.CreateTask(userID, input); err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+	return c.NoContent(http.StatusCreated)
+}
