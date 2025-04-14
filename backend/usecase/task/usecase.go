@@ -1,6 +1,9 @@
 package task
 
 import (
+	"time"
+
+	"github.com/tsunakit99/sp-web3/domain"
 	"github.com/tsunakit99/sp-web3/repository"
 )
 
@@ -28,11 +31,23 @@ func (u *taskUsecase) GetTasks(userID string) ([]TaskDTO, error) {
 	var dtos []TaskDTO
 	for _, t := range tasks {
 		dtos = append(dtos, TaskDTO{
-			ID: t.ID,
-			Title: t.Title,
+			ID:          t.ID,
+			Title:       t.Title,
 			Description: t.Description,
 			IsCompleted: t.IsCompleted,
 		})
 	}
 	return dtos, nil
+}
+
+func (u *taskUsecase) CreateTask(userID string, input CreateTaskInput) error {
+	task := domain.Task{
+		UserID:      userID,
+		Title:       input.Title,
+		Description: input.Description,
+		IsCompleted: false,
+		DueDate:     input.DueDate,
+		CreatedAt:   time.Now(),
+	}
+	return u.repo.Insert(task)
 }
