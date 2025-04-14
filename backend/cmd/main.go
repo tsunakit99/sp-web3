@@ -22,6 +22,7 @@ func main() {
 	e.Use(middleware.SupabaseAuthMiddleware)
 
 	e.GET("/tasks", taskHandler.GetTasks)
+	e.POST("/tasks", taskHandler.CreateTask)
 
 	log.Fatal(e.Start(":4000"))
 }
