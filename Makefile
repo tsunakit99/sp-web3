@@ -17,3 +17,4 @@ supabase-up:
 
 supabase-down:
 	supabase stop
+	
