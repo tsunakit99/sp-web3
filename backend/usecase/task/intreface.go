@@ -18,4 +18,5 @@ type TaskUsecase interface {
 	GetTasks(userID string) ([]TaskDTO, error)
 	CreateTask(userID string, input CreateTaskInput) error
 	UpdateTask(userID string, input UpdateTaskInput) error
+	DeleteTask(userID string, taskID string) error
 }
