@@ -54,3 +54,13 @@ func (h *TaskHandler) UpdateTask(c echo.Context) error {
 	}
 	return c.NoContent(http.StatusOK)
 }
+
+func (h *TaskHandler) DeleteTask(c echo.Context) error {
+	userID := c.Get("user_id").(string)
+	taskID := c.Param("id")
+
+	if err := h.uc.DeleteTask(userID, taskID); err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+	return c.NoContent(http.StatusNoContent)
+}
