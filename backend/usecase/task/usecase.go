@@ -41,6 +41,11 @@ func (u *taskUsecase) GetTasks(userID string) ([]TaskDTO, error) {
 }
 
 func (u *taskUsecase) CreateTask(userID string, input CreateTaskInput) error {
+
+	if err := ValidateTaskAndDescription(input.Title, input.Description); err != nil {
+		return err
+	}
+
 	task := domain.Task{
 		UserID:      userID,
 		Title:       input.Title,
@@ -50,4 +55,20 @@ func (u *taskUsecase) CreateTask(userID string, input CreateTaskInput) error {
 		CreatedAt:   time.Now(),
 	}
 	return u.repo.Insert(task)
+}
+
+func (u *taskUsecase) UpdateTask(userID string, input UpdateTaskInput) error {
+
+	if err := ValidateTaskAndDescription(input.Title, input.Description); err != nil {
+		return err
+	}
+
+	task := domain.Task{
+		ID:          input.ID,
+		UserID:      userID,
+		Title:       input.Title,
+		Description: input.Description,
+		DueDate:     input.DueDate,
+	}
+	return u.repo.Update(task)
 }
