@@ -72,3 +72,7 @@ func (u *taskUsecase) UpdateTask(userID string, input UpdateTaskInput) error {
 	}
 	return u.repo.Update(task)
 }
+
+func (u *taskUsecase) DeleteTask(userID string, taskID string) error {
+	return u.repo.Delete(userID, taskID)
+}
