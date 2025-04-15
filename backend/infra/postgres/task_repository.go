@@ -39,3 +39,9 @@ func (r *taskRepository) Insert(task domain.Task) error {
 		task.UserID, task.Title, task.Description, task.IsCompleted, task.DueDate, task.CreatedAt)
 	return err
 }
+
+func (r *taskRepository) Update(task domain.Task) error {
+	_, err := r.db.Exec("UPDATE tasks SET title = $1, description = $2, due_date = $3 WHERE id = $4 AND user_id = $5",
+		task.Title, task.Description, task.DueDate, task.ID, task.UserID)
+	return err
+}
