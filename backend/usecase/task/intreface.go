@@ -19,4 +19,5 @@ type TaskUsecase interface {
 	CreateTask(userID string, input CreateTaskInput) error
 	UpdateTask(userID string, input UpdateTaskInput) error
 	DeleteTask(userID string, taskID string) error
+	ToggleComplete(userID string, taskID string) error
 }
