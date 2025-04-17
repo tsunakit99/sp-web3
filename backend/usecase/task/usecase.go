@@ -76,3 +76,7 @@ func (u *taskUsecase) UpdateTask(userID string, input UpdateTaskInput) error {
 func (u *taskUsecase) DeleteTask(userID string, taskID string) error {
 	return u.repo.Delete(userID, taskID)
 }
+
+func (u *taskUsecase) ToggleComplete(userID string, taskID string) error {
+	return u.repo.ToggleComplete(taskID, userID)
+}
