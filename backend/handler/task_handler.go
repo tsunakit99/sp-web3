@@ -64,3 +64,13 @@ func (h *TaskHandler) DeleteTask(c echo.Context) error {
 	}
 	return c.NoContent(http.StatusNoContent)
 }
+
+func (h *TaskHandler) ToggleComplete(c echo.Context) error {
+	userID := c.Get("user_id").(string)
+	taskID := c.Param("id")
+
+	if err := h.uc.ToggleComplete(userID, taskID); err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+	return c.NoContent(http.StatusOK)
+}
