@@ -25,6 +25,7 @@ func main() {
 	e.POST("/tasks", taskHandler.CreateTask)
 	e.PATCH("/tasks/:id", taskHandler.UpdateTask)
 	e.DELETE("/tasks/:id", taskHandler.DeleteTask)
+	e.PATCH("/tasks/:id/toggle", taskHandler.ToggleComplete)
 
 	log.Fatal(e.Start(":4000"))
 }
