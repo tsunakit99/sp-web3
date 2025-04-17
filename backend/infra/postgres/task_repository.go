@@ -50,3 +50,8 @@ func (r *taskRepository) Delete(taskID string, userID string) error {
 	_, err := r.db.Exec("DELETE FROM tasks WHERE id = $1 AND user_id = $2", taskID, userID)
 	return err
 }
+
+func (r *taskRepository) ToggleComplete(taskID string, userID string) error {
+	_, err := r.db.Exec("UPDATE tasks SET is_completed = NOT is_completed WHERE id = $1 AND user_id = $2", taskID, userID)
+	return err
+}
