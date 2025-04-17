@@ -7,5 +7,5 @@ type TaskRepository interface {
 	Insert(task domain.Task) error
 	Update(task domain.Task) error
 	Delete(taskID string, userID string) error
-	// ToggleCompleted(id string, userID string) error
+	ToggleComplete(id string, userID string) error
 }
