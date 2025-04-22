@@ -11,10 +11,3 @@ dev-up:
 dev-down:
 	docker compose -f docker-compose.dev.yml down
 	supabase stop
-
-supabase-up:
-	supabase start
-
-supabase-down:
-	supabase stop
-	
